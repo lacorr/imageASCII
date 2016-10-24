@@ -31,12 +31,15 @@ typedef union color
     unsigned int  couleur_int;
 }           color_t;
 
-int main()
+int main(int ac, char **av)
 {
+  if (ac != 2)
+    return (0);
+
     color_t tmp;
     header_t head;
     int i = 0;
-    int fd = open("afgan.bmp", O_RDONLY);
+    int fd = open(av[1], O_RDONLY);
     read(fd, &head, 54);
     char* toto = malloc((head.cinq - 54) * sizeof(char));
     if (toto == NULL)
@@ -83,7 +86,7 @@ int main()
                         titi = 7;
                     else
                         titi = 7;
-                    printf("\e[4%dm  \e[0m", titi);
+                    printf("\e[4%dm \e[0m", titi);
                     i++;
                 }
                 printf("\n");
